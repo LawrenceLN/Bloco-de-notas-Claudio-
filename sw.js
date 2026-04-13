@@ -29,3 +29,10 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(cached => cached || fetch(e.request))
   );
 });
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registrado:', reg))
+      .catch(err => console.log('Erro:', err));
+  });
+}
